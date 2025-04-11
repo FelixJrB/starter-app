@@ -1,0 +1,22 @@
+{
+  "name": "starter-app",
+  "version": "1.0.0",
+  "description": "Start App",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint": "npx eslint ./src || exit 0",
+    "lint:fix": "npx eslint ./src --fix || exit 0"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [],
+  "license": "proprietary-license",
+  "devDependencies": {
+    "vite": "6.2.6"
+  }
+}
