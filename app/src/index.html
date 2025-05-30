@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="min-h-screen bg-white">
   <!-- Sticky Navigation -->
@@ -40,12 +41,12 @@
         <div class="relative">
           <!-- Profile image -->
           <div class="aspect-square bg-gray-100 rounded-2xl">
-            <img src="/assets/images/Selfie.jpg" alt="Felix Berglund" class="w-full h-full object-cover rounded-2xl">
-          </div>
-        </div>
+            <img src="/assets/images/selfie.jpg" alt="Felix Berglund" class="w-full h-full object-cover rounded-2xl">
       </div>
     </div>
-  </section>
+      </div>
+    </div>
+    </section>
 
   <!-- Featured Work Section -->
   <section id="work" class="py-20 bg-gray-50">
@@ -55,8 +56,8 @@
         <!-- Eggcellent -->
         <a href="eggcellent.html" class="group block">
           <div class="aspect-video bg-gray-100 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img src="assets/images/Eggcellent/Presentation.jpg" alt="Eggcellent Presentation" class="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300" />
-          </div>
+            <img src="assets/images/Eggcellent/paper_prototype.jpg" alt="Eggcellent Presentation" class="rounded-lg shadow-md object-cover hover:opacity-80 transition w-full h-full"  />
+    </div>
           <div>
             <h3 class="text-lg font-semibold text-gray-900 mb-1">Eggcellent</h3>
             <p class="text-gray-700 mb-2">A consumer awareness app</p>
@@ -75,8 +76,7 @@
         <!-- Tiktok -->
         <a href="tiktok.html" class="group block">
           <div class="aspect-video bg-gray-100 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <img src="assets/images/Tiktok/TiktokCasestudy.jpg" alt="TikTok Case Study Main" class="rounded-lg shadow-md object-cover hover:opacity-80 transition" />
-            <span class="text-gray-400">Image coming soon</span>
+            <img src="assets/images/tiktok/tiktok_casestudy.jpg" alt="TikTok Case Study Main" class="rounded-lg shadow-md object-cover hover:opacity-80 transition w-full h-full" />
           </div>
           <div>
             <h3 class="text-lg font-semibold text-gray-900 mb-1">Tiktok</h3>
@@ -92,7 +92,7 @@
         <!-- Bossa Care -->
         <a href="bossa-care.html" class="group block">
           <div class="aspect-video bg-gray-100 rounded-xl overflow-hidden mb-4 flex items-center justify-center">
-            <span class="text-gray-400">Image coming soon</span>
+            <img src="assets/images/bossacare/bossacare_landing_page.png" alt="Bossa Care Website" class="rounded-lg shadow-md object-cover hover:opacity-80 transition w-full h-full" />
           </div>
           <div>
             <h3 class="text-lg font-semibold text-gray-900 mb-1">Bossa Care</h3>
@@ -122,27 +122,95 @@
           </div>
         </a>
       </div>
-    </div>
-  </section>
+      </div>
+    </section>
 
   <!-- Logo Carousel Section -->
   <section class="py-12 bg-white">
     <div class="container mx-auto max-w-5xl px-4">
+      <h2 class="text-2xl font-semibold text-gray-900 mb-8 text-center">Tools & Technologies</h2>
       <div class="overflow-hidden">
         <div class="flex gap-8 animate-logo-scroll items-center">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Csharp_Logo.png" alt="C#" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Figma-logo.svg" alt="Figma" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Adobe_XD_CC_icon.svg" alt="Adobe XD" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+          <!-- Design Tools -->
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">Figma</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <i class="fas fa-cube text-5xl text-gray-400 hover:text-gray-600 transition duration-300"></i>
+            <span class="text-sm text-gray-600 mt-2">3DS Max</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fb/Adobe_Illustrator_CC_icon.svg" alt="Illustrator" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">Illustrator</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" alt="Photoshop" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">Photoshop</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">JavaScript</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/HTML5_logo_and_wordmark.svg" alt="HTML5" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">HTML5</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/CSS3_logo_and_wordmark.svg" alt="CSS3" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">CSS3</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">GitHub</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/WordPress_blue_logo.svg" alt="WordPress" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">WordPress</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Webflow" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">Webflow</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">Notion</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <i class="fas fa-chalkboard text-5xl text-gray-400 hover:text-gray-600 transition duration-300"></i>
+            <span class="text-sm text-gray-600 mt-2">Miro</span>
+          </div>
           <!-- Duplicate for seamless loop -->
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="React" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+          <div class="flex flex-col items-center">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" class="h-12 filter grayscale hover:grayscale-0 transition duration-300">
+            <span class="text-sm text-gray-600 mt-2">Figma</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <i class="fas fa-cube text-5xl text-gray-400 hover:text-gray-600 transition duration-300"></i>
+            <span class="text-sm text-gray-600 mt-2">3DS Max</span>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Card Section -->
+  <section class="py-12 bg-transparent">
+    <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Card 1: About Me -->
+      <div class="rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200 p-8 shadow-2xl hover:scale-105 transition">
+        <h3 class="text-xl font-bold mb-2 text-gray-900">Om mig</h3>
+        <p class="text-gray-700">Passionerad UX-designer som förvandlar komplexa problem till eleganta, människocentrerade lösningar. Skapar intuitiva och visuellt tilltalande upplevelser som engagerar och inspirerar.</p>
+      </div>
+      <!-- Card 2: What I Do -->
+      <div class="rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200 p-8 shadow-2xl hover:scale-105 transition">
+        <h3 class="text-xl font-bold mb-2 text-gray-900">Vad jag gör</h3>
+        <p class="text-gray-700">UX-design, prototyper, användartester och research. Jag brinner för att skapa användarvänliga och engagerande digitala produkter.</p>
+      </div>
+      <!-- Card 3: How I Work -->
+      <div class="rounded-2xl bg-white/80 backdrop-blur-md border border-gray-200 p-8 shadow-2xl hover:scale-105 transition">
+        <h3 class="text-xl font-bold mb-2 text-gray-900">Så här jobbar jag</h3>
+        <p class="text-gray-700">Empati, kreativ problemlösning och samarbete. Jag tror på användarcentrerad design och att arbeta iterativt tillsammans med teamet och användarna.</p>
       </div>
     </div>
   </section>
@@ -168,7 +236,7 @@
         <div class="relative">
           <!-- About image -->
           <div class="aspect-square bg-gray-100 rounded-2xl">
-            <img src="/assets/images/Selfie.jpg" alt="Felix Berglund" class="w-full h-full object-cover rounded-2xl">
+            <img src="/assets/images/selfie.jpg" alt="Felix Berglund" class="w-full h-full object-cover rounded-2xl">
           </div>
         </div>
       </div>
@@ -192,15 +260,15 @@
   <footer class="py-8 border-t">
     <div class="container mx-auto max-w-6xl px-4">
       <div class="flex justify-between items-center">
-        <p class="text-gray-600">© 2024 Felix Berglund. All rights reserved.</p>
+        <p class="text-gray-600">© 2025 Felix Berglund. All rights reserved.</p>
         <div class="flex gap-6">
           <a href="https://www.linkedin.com/in/felix-berglund-5a566825b/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600">LinkedIn</a>
           <a href="https://github.com/FelixJrB" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600">GitHub</a>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-
+    </footer>
+    
   <script type="module" src="js/index.js"></script>
 </body>
 </html>
