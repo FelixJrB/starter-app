@@ -97,3 +97,36 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Add logo carousel animation styles
+const style = document.createElement('style');
+style.textContent = `
+  @keyframes logo-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(calc(-50% - 1rem), 0, 0);
+    }
+  }
+
+  .animate-logo-scroll {
+    animation: logo-scroll 80s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .animate-logo-scroll:hover {
+    animation-play-state: paused;
+  }
+
+  /* Add a wrapper to prevent layout shifts */
+  .logo-carousel-wrapper {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    transform: translateZ(0);
+  }
+`;
+document.head.appendChild(style);

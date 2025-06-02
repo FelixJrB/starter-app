@@ -4,7 +4,12 @@ export default {
     "./**/*.{html,js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        heading: ['Poppins', 'Inter', 'sans-serif'],
+        body: ['Inter', 'sans-serif'],
+      },
+    },
   },
   plugins: [],
 };
