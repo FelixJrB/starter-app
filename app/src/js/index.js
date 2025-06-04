@@ -98,72 +98,20 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Add logo carousel animation styles
-const style = document.createElement('style');
-style.textContent = `
-  @keyframes logo-scroll {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-logo-scroll {
-    animation: logo-scroll 70s linear infinite;
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  .animate-logo-scroll:hover {
-    animation-play-state: paused;
-  }
-
-  /* Add a wrapper to prevent layout shifts */
-  .logo-carousel-wrapper {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    transform: translateZ(0);
-    isolation: isolate;
-    padding: 0;
-    margin: 0;
-  }
-
-  /* Ensure the carousel doesn't affect other elements */
-  .logo-carousel-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 100px;
-    background: linear-gradient(to right, transparent, white);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .logo-carousel-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    width: 100px;
-    background: linear-gradient(to left, transparent, white);
-    pointer-events: none;
-    z-index: 1;
-  }
-`;
-document.head.appendChild(style);
+// Ensure smooth carousel animation
+document.addEventListener('DOMContentLoaded', () => {
+  const carousels = document.querySelectorAll('.animate-infinite-scroll');
+  carousels.forEach(carousel => {
+    // Force a reflow to ensure smooth animation start
+    carousel.style.animation = 'none';
+    carousel.offsetHeight; // Trigger reflow
+    carousel.style.animation = null;
+  });
+});
 
 // Automatically update copyright year
 const copyrightElement = document.getElementById('copyright-year');
 if (copyrightElement) {
   const currentYear = new Date().getFullYear();
-  // Assuming the format is "© YYYY Name. All rights reserved."
-  // We replace the hardcoded year (2025) with the current year
   copyrightElement.textContent = copyrightElement.textContent.replace('2025', currentYear);
 }

@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./**/*.{html,js,ts,jsx,tsx}",
+    "./app/src/**/*.{html,js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -9,6 +9,15 @@ export default {
         heading: ['Poppins', 'Inter', 'sans-serif'],
         body: ['Inter', 'sans-serif'],
       },
+      animation: {
+        'infinite-scroll': 'infinite-scroll 25s linear infinite',
+      },
+      keyframes: {
+        'infinite-scroll': {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-100%)' },
+        }
+      }
     },
   },
   plugins: [],
