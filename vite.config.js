@@ -1,5 +1,5 @@
-import { defineConfig } from 'vite'
-import path from 'path'
+import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
   root: 'app/src',
@@ -16,4 +16,4 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.js',
   },
-})
+});

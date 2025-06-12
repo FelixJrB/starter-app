@@ -1,322 +1,753 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wireframe Design Case Study | Felix Berglund</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <style>
-    body.modal-open {
-      overflow: hidden;
-      position: fixed;
-      width: 100%;
-      height: 100%;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wireframe Design Case Study | Felix Berglund</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      body.modal-open {
+        overflow: hidden;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+      }
 
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      inset: 0;
-      background-color: rgba(0, 0, 0, 0.95);
-      cursor: zoom-out;
-      user-select: none;
-    }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        inset: 0;
+        background-color: rgba(0, 0, 0, 0.95);
+        cursor: zoom-out;
+        user-select: none;
+      }
 
-    .modal.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .modal-content {
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain;
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-      filter: brightness(1.02) contrast(1.02);
-      cursor: zoom-in;
-      transform-origin: center;
-      transition: transform 0.2s ease-out;
-    }
+      .modal-content {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+        filter: brightness(1.02) contrast(1.02);
+        cursor: zoom-in;
+        transform-origin: center;
+        transition: transform 0.2s ease-out;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
 
-    .modal-close {
-      position: fixed;
-      top: 20px;
-      right: 40px;
-      color: #f1f1f1;
-      font-size: 45px;
-      font-weight: bold;
-      cursor: pointer;
-      text-shadow: 0 0 10px rgba(0,0,0,0.5);
-      z-index: 10000;
-    }
+      .modal-content.draggable {
+        cursor: grab !important;
+      }
 
-    .zoom-indicator {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.7);
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      pointer-events: none;
-      z-index: 10000;
-    }
+      .modal-content.dragging {
+        cursor: grabbing !important;
+        transition: none !important;
+      }
 
-    .zoom-indicator.visible {
-      opacity: 1;
-    }
-  </style>
-</head>
-<body class="min-h-screen bg-white">
+      .modal-close {
+        position: fixed;
+        top: 20px;
+        right: 40px;
+        color: #f1f1f1;
+        font-size: 45px;
+        font-weight: bold;
+        cursor: pointer;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 10000;
+      }
 
-  <!-- Navigation -->
-  <nav id="navbar" class="fixed top-0 z-10 w-full transition-all duration-300 bg-white/80 shadow-md">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center">
-          <a href="index.html" class="text-2xl font-bold text-gray-900">Felix Berglund</a>
-        </div>
-        <div class="flex space-x-8">
-          <a href="index.html#work" class="text-gray-700 hover:text-blue-600 transition-colors">Work</a>
-          <a href="index.html#about" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
-          <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
-        </div>
-      </div>
-    </div>
-  </nav>
+      .zoom-indicator {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 10000;
+      }
 
-  <main class="pt-32 pb-20 px-4">
-    <div class="container mx-auto max-w-6xl">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8 font-heading">Wireframe design for website improvements</h1>
+      .zoom-indicator.visible {
+        opacity: 1;
+      }
 
-      <div class="prose max-w-none">
-        <p class="text-gray-700 mb-4 font-body">
-          During my internship at Wilson Creative, I had the opportunity to develop wireframes for two different client projects, where I focused on improving the user experience through layout restructuring, SEO optimization, and increased website relevance.
-        </p>
+      .drag-indicator {
+        position: fixed;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        z-index: 10000;
+      }
 
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Bluepartner - Consulting company in Kalmar</h2>
-        <p class="text-gray-700 mb-4 font-body">
-          For Bluepartner, I carried out an extensive restructuring of their website with a focus on:
-        </p>
-        <ul class="list-disc list-inside text-gray-700 mb-4 font-body">
-          <li>Content clarification - Restructured the information for better readability and clarity</li>
-          <li>Navigation Optimization - Simplified user flows and created a more intuitive website structure</li>
-          <li>SEO improvements - Implemented strategies for better searchability rankings through consulting with the team</li>
-          <li>Visual modernization - Updated the design language for a more contemporary and professional look</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Hagblom - Group company southern/central Sweden</h2>
-        <p class="text-gray-700 mb-4 font-body">
-          The project with Hagblom required a methodical approach where I:
-        </p>
-        <ul class="list-disc list-inside text-gray-700 mb-4 font-body">
-          <li>Analyzed existing structure - Mapped current website architecture and identified bottlenecks</li>
-          <li>Identified usability issues - Conducted user experience evaluation</li>
-          <li>Developed impact map - Created a visual overview of where to focus the resources and to gain further understanding of the implementation and the expected improvements and their impact on business goals</li>
-          <li>Developed improvement proposals - Presented concrete solutions based on discovered problems</li>
-          <li>Implemented the changes iteratively - Worked closely with the development team for gradual improvement</li>
-        </ul>
-
-        <div class="my-8">
-          <img src="assets/images/wilson_creative/hagbloms_effektkarta.png" 
-               alt="Hagblom Impact Map showing resource focus and implementation overview" 
-               class="w-full rounded-lg shadow-lg cursor-pointer hover:opacity-90 transition-opacity"
-               onclick="openModal(this)">
-          <p class="text-sm text-gray-600 mt-2 text-center">Impact map showing resource focus areas and implementation overview for Hagblom</p>
-        </div>
-
-        <!-- Modal for enlarged image -->
-        <div id="imageModal" class="modal">
-          <span class="modal-close" onclick="closeModal()">&times;</span>
-          <img class="modal-content" id="modalImage">
-          <div class="zoom-indicator">Use mouse wheel to zoom in/out</div>
-        </div>
-
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Lessons learned and development</h2>
-        <p class="text-gray-700 mb-4 font-body">
-          These projects strengthened my skills in:
-        </p>
-        <ul class="list-disc list-inside text-gray-700 mb-4 font-body">
-          <li>User-centered design process</li>
-          <li>Understanding of business needs and goals</li>
-          <li>Clear communication from concept to finished solution</li>
-          <li>Collaboration with development teams in iterative processes</li>
-        </ul>
-
-        <p class="text-gray-700 mb-4 font-body">
-          By working with two different types of companies – from a local consulting firm to a larger corporation – I gained valuable experience in how UX design needs to be adapted to different business contexts and target groups.
-        </p>
-
-        <p class="text-gray-700 mb-4 font-body">
-          <a href="index.html#work" class="text-blue-600 hover:text-blue-700">Back to Selected Work</a>
-        </p>
-      </div>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="py-8 border-t">
-    <div class="container mx-auto max-w-6xl px-4">
-      <div class="flex justify-between items-center">
-        <p class="text-gray-600">© <span id="current-year-footer"></span> Felix Berglund. All rights reserved.</p>
-        <div class="flex gap-6">
-          <a href="https://www.linkedin.com/in/felix-berglund-5a566825b/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600">LinkedIn</a>
-          <a href="https://github.com/FelixJrB" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600">GitHub</a>
+      .drag-indicator.visible {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen bg-white">
+    <!-- Navigation -->
+    <nav
+      id="navbar"
+      class="fixed top-0 z-10 w-full bg-white/80 shadow-md transition-all duration-300"
+    >
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center justify-between">
+          <div class="flex items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">Felix Berglund</a>
+          </div>
+          <div class="flex space-x-8">
+            <a href="index.html#work" class="text-gray-700 transition-colors hover:text-blue-600"
+              >Work</a
+            >
+            <a href="index.html#about" class="text-gray-700 transition-colors hover:text-blue-600"
+              >About</a
+            >
+            <a href="index.html#contact" class="text-gray-700 transition-colors hover:text-blue-600"
+              >Contact</a
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </nav>
 
-  <script>
-    // Automatically update copyright year in footer
-    const yearSpan = document.getElementById('current-year-footer');
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
+    <main class="px-4 pb-20 pt-32">
+      <div class="container mx-auto max-w-6xl">
+        <h1 class="mb-8 font-heading text-4xl font-bold text-gray-900 md:text-5xl">
+          Wireframe design for website improvements
+        </h1>
 
-    let scale = 1;
-    let modalOpen = false;
-    let translateX = 0;
-    let translateY = 0;
+        <div class="prose max-w-none">
+          <p class="mb-4 font-body text-gray-700">
+            During my internship at Wilson Creative, I had the opportunity to develop wireframes for
+            two different client projects, where I focused on improving the user experience through
+            layout restructuring, SEO optimization, and increased website relevance. I created Impact maps as a way to visualize the user journey and the impact of the changes as a mean to gain insight of the main users needs and wants, this was done as a means on what should be focused on in the project. Both projects
+            were local companies, where ones a larger company with its head office in Kalmar and can
+            be found across southern and central parts of Sweden.
+          </p>
 
-    function openModal(img) {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      const zoomIndicator = document.querySelector('.zoom-indicator');
-      
-      // Lock the body
-      document.body.classList.add('modal-open');
-      modalOpen = true;
-      
-      // Show modal
-      modal.classList.add('active');
-      modalImg.src = img.src;
-      
-      // Reset transform values
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      updateTransform(modalImg);
-      
-      // Show zoom indicator
-      zoomIndicator.textContent = 'Use mouse wheel to zoom in/out';
-      zoomIndicator.classList.add('visible');
-      setTimeout(() => {
-        zoomIndicator.classList.remove('visible');
-      }, 2000);
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">
+            Bluepartner - Consulting company in Kalmar
+          </h2>
+          <div class="mb-8 rounded-lg bg-gray-50 p-6">
+            <p class="mb-6 font-body text-gray-700">
+              For Bluepartner, I carried out an extensive restructuring of their website with a focus on:
+            </p>
+            <div class="grid gap-6 md:grid-cols-2">
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">Content Clarification</h3>
+                <p class="text-gray-700">Restructured the information for better readability and clarity</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">Navigation Optimization</h3>
+                <p class="text-gray-700">Simplified user flows and created a more intuitive website structure</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">SEO Improvements</h3>
+                <p class="text-gray-700">Implemented strategies for better searchability rankings through consulting with the team</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">Visual Modernization</h3>
+                <p class="text-gray-700">Updated the design language for a more contemporary and professional look</p>
+              </div>
+            </div>
+          </div>
 
-      // Preload high quality version if available
-      const highResSrc = img.src.replace('.png', '@2x.png');
-      const highResImg = new Image();
-      highResImg.src = highResSrc;
-      highResImg.onload = function() {
-        modalImg.src = highResSrc;
-      };
-    }
+          <!-- Bluepartner Wireframes Grid -->
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mt-8 mb-8">
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/bp_effektkarta.png"
+                  alt="Bluepartner Impact Map"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">Bluepartner Impact Map</p>
+              </div>
+            </div>
 
-    function updateTransform(img) {
-      img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
-    }
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/bp_revised_effektkarta.png"
+                  alt="Bluepartner Revised Impact Map"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">Bluepartner Revised Impact Map</p>
+              </div>
+            </div>
 
-    // Handle mouse wheel zoom
-    document.getElementById('modalImage').addEventListener('wheel', function(e) {
-      if (!modalOpen) return;
-      
-      e.preventDefault();
-      const modalImg = document.getElementById('modalImage');
-      const zoomIndicator = document.querySelector('.zoom-indicator');
-      
-      // Get mouse position relative to image
-      const rect = modalImg.getBoundingClientRect();
-      const mouseX = e.clientX - rect.left;
-      const mouseY = e.clientY - rect.top;
-      
-      // Calculate zoom factor
-      const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
-      const newScale = Math.min(Math.max(scale * zoomFactor, 1), 3);
-      
-      if (newScale !== scale) {
-        // Calculate the point we're zooming towards
-        const scaleChange = newScale - scale;
-        
-        // Calculate the offset from center
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const offsetX = mouseX - centerX;
-        const offsetY = mouseY - centerY;
-        
-        // Update translation to zoom towards mouse position
-        translateX -= offsetX * (scaleChange / scale);
-        translateY -= offsetY * (scaleChange / scale);
-        
-        // Limit translation to keep image visible
-        const maxTranslate = (newScale - 1) * rect.width / 2;
-        translateX = Math.max(-maxTranslate, Math.min(maxTranslate, translateX));
-        translateY = Math.max(-maxTranslate, Math.min(maxTranslate, translateY));
-        
-        scale = newScale;
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/bp_wireframe_homepage.png"
+                  alt="Bluepartner Homepage Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">Bluepartner Homepage Wireframe</p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/bp_wireframe_services.png"
+                  alt="Bluepartner Services Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">Bluepartner Services Page Wireframe</p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/bp_consultant.png"
+                  alt="Bluepartner Consultant Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">Bluepartner Consultant Page Wireframe</p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/bp_projectmanagement.png"
+                  alt="Bluepartner Project Management Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">Bluepartner Project Management Page Wireframe</p>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">
+            Hagblom - Group company in southern and central parts of Sweden
+          </h2>
+          <div class="mb-8 rounded-lg bg-gray-50 p-6">
+            <p class="mb-6 font-body text-gray-700">
+              The project with Hagblom required a methodical approach where I:
+            </p>
+            <div class="grid gap-6 md:grid-cols-2">
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">Structure Analysis</h3>
+                <p class="text-gray-700">Mapped current website architecture and identified bottlenecks</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">Impact Mapping</h3>
+                <p class="text-gray-700">Created a visual overview of resource focus areas and implementation impact on business goals</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">Solution Development</h3>
+                <p class="text-gray-700">Presented concrete solutions based on discovered problems</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <h3 class="mb-2 font-semibold text-gray-900">Iterative Implementation</h3>
+                <p class="text-gray-700">Worked closely with the development team for gradual improvement</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 mt-8 mb-8">
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/hagbloms_effektkarta.png"
+                  alt="Hagblom Impact Map showing resource focus and implementation overview"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Impact map showing resource areas and implementation overview for Hagblom
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/foretags_persona.png"
+                  alt="Hagblom Business Persons Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom Business Persona Page
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/privatkunder_persona.png"
+                  alt="Hagblom Private Customer Persona Page"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom Private Customer Persona Page
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/hero_welcomepage.png"
+                  alt="Hagblom Start Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom Start Page Wireframe
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/hagblom_helsida_koncernen.png"
+                  alt="Hagblom The Group Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom The Group Page Wireframe
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/hagblom_helsida_koncernen_verksamhet_maleri.png"
+                  alt="Hagblom Painting Services Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom Painting Services Page Wireframe
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/hagblom_helsida_privatperson.png"
+                  alt="Hagblom Private Person Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom Private Person Page Wireframe
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/hagblom_helsida_foretagare.png"
+                  alt="Hagblom For Businesses Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom For Businesses Page Wireframe
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-sm flex flex-col overflow-hidden">
+              <div class="relative h-56 flex items-center justify-center">
+                <img
+                  src="assets/images/wilson_creative/hagblom_helsida_kontakt.png"
+                  alt="Hagblom Contact Page Wireframe"
+                  class="object-contain w-full h-full cursor-pointer rounded-lg shadow-lg transition-opacity hover:opacity-90"
+                  onclick="openModal(this)"
+                />
+              </div>
+              <div class="p-4 flex-shrink-0">
+                <p class="mt-2 text-center text-sm text-gray-600">
+                  Hagblom Contact Page Wireframe
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal for enlarged image -->
+          <div id="imageModal" class="modal">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <img class="modal-content" id="modalImage" />
+            <div class="zoom-indicator">Use mouse wheel to zoom in/out</div>
+            <div class="drag-indicator">Click and drag to move around</div>
+          </div>
+
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">
+            Lessons learned and personal growth
+          </h2>
+          <div class="mb-8 rounded-lg bg-gray-50 p-6">
+            <p class="mb-6 font-body text-gray-700">
+              These projects helped me develop and strengthen several key skills:
+            </p>
+            <div class="grid gap-6 md:grid-cols-2">
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <div class="mb-3 flex items-center gap-3">
+                  <div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                    <i class="fas fa-users text-sm"></i>
+                  </div>
+                  <h3 class="font-semibold text-gray-900">User-Centered Design</h3>
+                </div>
+                <p class="text-gray-700">Gained practical experience in understanding user needs and translating them into design solutions</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <div class="mb-3 flex items-center gap-3">
+                  <div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                    <i class="fas fa-bullseye text-sm"></i>
+                  </div>
+                  <h3 class="font-semibold text-gray-900">Business Understanding</h3>
+                </div>
+                <p class="text-gray-700">Learned to better align design solutions with business objectives and client goals</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <div class="mb-3 flex items-center gap-3">
+                  <div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                    <i class="fas fa-comments text-sm"></i>
+                  </div>
+                  <h3 class="font-semibold text-gray-900">Clear Communication</h3>
+                </div>
+                <p class="text-gray-700">Developed skills in effectively communicating design concepts from initial ideas to final implementation</p>
+              </div>
+              <div class="rounded-lg bg-white p-4 shadow-sm">
+                <div class="mb-3 flex items-center gap-3">
+                  <div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100 text-blue-600">
+                    <i class="fas fa-code-branch text-sm"></i>
+                  </div>
+                  <h3 class="font-semibold text-gray-900">Team Collaboration</h3>
+                </div>
+                <p class="text-gray-700">Gained experience working with development teams in iterative, agile processes</p>
+              </div>
+            </div>
+          </div>
+
+          <p class="mb-4 font-body text-gray-700">
+            By working with two different types of companies. Both local, but different, where ones a
+            local consulting firm and the other is a larger corporation that stretches from the southern and
+            central parts of Sweden. By taking on these projects I gained valuable insight and experience in how UX design needs to be
+            adapted to different business contexts and target groups.
+          </p>
+
+          <p class="mb-4 font-body text-gray-700">
+            <a href="index.html#work" class="text-blue-600 hover:text-blue-700"
+              >Back to Selected Work</a
+            >
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t py-8">
+      <div class="container mx-auto max-w-6xl px-4">
+        <div class="flex items-center justify-between">
+          <p class="text-gray-600">
+            © <span id="current-year-footer"></span> Felix Berglund. All rights reserved.
+          </p>
+          <div class="flex gap-6">
+            <a
+              href="https://www.linkedin.com/in/felix-berglund-5a566825b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-600 hover:text-blue-600"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/FelixJrB"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-600 hover:text-blue-600"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Automatically update copyright year in footer
+      const yearSpan = document.getElementById('current-year-footer');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+
+      let scale = 1;
+      let modalOpen = false;
+      let translateX = 0;
+      let translateY = 0;
+      let isDragging = false;
+      let startX, startY;
+      let modalImg;
+
+      function openModal(img) {
+        const modal = document.getElementById('imageModal');
+        modalImg = document.getElementById('modalImage');
+        const zoomIndicator = document.querySelector('.zoom-indicator');
+        const dragIndicator = document.querySelector('.drag-indicator');
+
+        // Lock the body
+        document.body.classList.add('modal-open');
+        modalOpen = true;
+
+        // Show modal
+        modal.classList.add('active');
+        modalImg.src = img.src;
+
+        // Reset transform values
+        scale = 1;
+        translateX = 0;
+        translateY = 0;
+        isDragging = false;
         updateTransform(modalImg);
-        
-        // Show zoom level
-        zoomIndicator.textContent = `Zoom: ${Math.round(scale * 100)}%`;
+        modalImg.classList.remove('draggable', 'dragging');
+
+        // Show zoom indicator
+        zoomIndicator.textContent = 'Use mouse wheel to zoom in/out';
         zoomIndicator.classList.add('visible');
-        clearTimeout(zoomIndicator.timeout);
-        zoomIndicator.timeout = setTimeout(() => {
+        setTimeout(() => {
           zoomIndicator.classList.remove('visible');
-        }, 1000);
+        }, 2000);
+
+        // Preload high quality version if available
+        const highResSrc = img.src.replace('.png', '@2x.png');
+        const highResImg = new Image();
+        highResImg.src = highResSrc;
+        highResImg.onload = function () {
+          modalImg.src = highResSrc;
+        };
       }
-    }, { passive: false });
 
-    function closeModal() {
-      const modal = document.getElementById('imageModal');
-      const modalImg = document.getElementById('modalImage');
-      
-      // Reset everything
-      scale = 1;
-      translateX = 0;
-      translateY = 0;
-      updateTransform(modalImg);
-      modalOpen = false;
-      
-      // Remove modal
-      modal.classList.remove('active');
-      
-      // Unlock the body
-      document.body.classList.remove('modal-open');
-    }
-
-    // Close modal when clicking outside the image
-    document.getElementById('imageModal').addEventListener('click', function(e) {
-      if (e.target === this) {
-        closeModal();
+      function updateTransform(img) {
+        img.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        
+        // Update cursor and drag indicator based on zoom level
+        if (scale > 1) {
+          img.classList.add('draggable');
+          const dragIndicator = document.querySelector('.drag-indicator');
+          if (dragIndicator) {
+            dragIndicator.textContent = 'Click and drag to move around';
+            dragIndicator.classList.add('visible');
+            setTimeout(() => {
+              dragIndicator.classList.remove('visible');
+            }, 2000);
+          }
+        } else {
+          img.classList.remove('draggable', 'dragging');
+        }
       }
-    });
 
-    // Close modal when pressing Escape key
-    document.addEventListener('keydown', function(event) {
-      if (event.key === 'Escape' && modalOpen) {
-        closeModal();
+      // Handle mouse wheel zoom
+      document.getElementById('modalImage').addEventListener(
+        'wheel',
+        function (e) {
+          if (!modalOpen) return;
+
+          e.preventDefault();
+          const modalImg = document.getElementById('modalImage');
+          const zoomIndicator = document.querySelector('.zoom-indicator');
+
+          // Get mouse position relative to image
+          const rect = modalImg.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          // Calculate zoom factor
+          const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+          const newScale = Math.min(Math.max(scale * zoomFactor, 1), 3);
+
+          if (newScale !== scale) {
+            // Calculate the point we're zooming towards
+            const scaleChange = newScale - scale;
+
+            // Calculate the offset from center
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const offsetX = mouseX - centerX;
+            const offsetY = mouseY - centerY;
+
+            // Update translation to zoom towards mouse position
+            translateX -= offsetX * (scaleChange / scale);
+            translateY -= offsetY * (scaleChange / scale);
+
+            // Limit translation to keep image visible
+            const maxTranslate = ((newScale - 1) * rect.width) / 2;
+            translateX = Math.max(-maxTranslate, Math.min(maxTranslate, translateX));
+            translateY = Math.max(-maxTranslate, Math.min(maxTranslate, translateY));
+
+            scale = newScale;
+            updateTransform(modalImg);
+
+            // Show zoom level
+            zoomIndicator.textContent = `Zoom: ${Math.round(scale * 100)}%`;
+            zoomIndicator.classList.add('visible');
+            clearTimeout(zoomIndicator.timeout);
+            zoomIndicator.timeout = setTimeout(() => {
+              zoomIndicator.classList.remove('visible');
+            }, 1000);
+          }
+        },
+        { passive: false }
+      );
+
+      // Add drag functionality
+      document.getElementById('modalImage').addEventListener('mousedown', function(e) {
+        if (scale > 1) {
+          isDragging = true;
+          startX = e.clientX - translateX;
+          startY = e.clientY - translateY;
+          this.classList.add('dragging');
+        }
+      });
+
+      document.addEventListener('mousemove', function(e) {
+        if (isDragging && scale > 1) {
+          e.preventDefault();
+          const rect = modalImg.getBoundingClientRect();
+          const maxTranslate = ((scale - 1) * rect.width) / 2;
+          
+          translateX = e.clientX - startX;
+          translateY = e.clientY - startY;
+          
+          // Limit translation to keep image visible
+          translateX = Math.max(-maxTranslate, Math.min(maxTranslate, translateX));
+          translateY = Math.max(-maxTranslate, Math.min(maxTranslate, translateY));
+          
+          updateTransform(modalImg);
+        }
+      });
+
+      document.addEventListener('mouseup', function() {
+        if (isDragging) {
+          isDragging = false;
+          modalImg.classList.remove('dragging');
+        }
+      });
+
+      function closeModal() {
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const dragIndicator = document.querySelector('.drag-indicator');
+
+        // Reset everything
+        scale = 1;
+        translateX = 0;
+        translateY = 0;
+        isDragging = false;
+        updateTransform(modalImg);
+        modalImg.classList.remove('draggable', 'dragging');
+        modalOpen = false;
+        if (dragIndicator) {
+          dragIndicator.classList.remove('visible');
+        }
+
+        // Remove modal
+        modal.classList.remove('active');
+
+        // Unlock the body
+        document.body.classList.remove('modal-open');
       }
-    });
 
-    // Prevent any scrolling while modal is open
-    document.addEventListener('wheel', function(e) {
-      if (modalOpen) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-  </script>
+      // Close modal when clicking outside the image
+      document.getElementById('imageModal').addEventListener('click', function (e) {
+        if (e.target === this) {
+          closeModal();
+        }
+      });
 
-</body>
-</html> 
+      // Close modal when pressing Escape key
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modalOpen) {
+          closeModal();
+        }
+      });
+
+      // Prevent any scrolling while modal is open
+      document.addEventListener(
+        'wheel',
+        function (e) {
+          if (modalOpen) {
+            e.preventDefault();
+          }
+        },
+        { passive: false }
+      );
+    </script>
+  </body>
+</html>

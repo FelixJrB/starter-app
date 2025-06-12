@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    "./app/src/**/*.{html,js,ts,jsx,tsx}",
-  ],
+  content: ['./app/src/**/*.{html,js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
@@ -16,8 +14,8 @@ export default {
         'infinite-scroll': {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-100%)' },
-        }
-      }
+        },
+      },
     },
   },
   plugins: [],

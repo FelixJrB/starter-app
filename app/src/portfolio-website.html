@@ -1,99 +1,145 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Website Case Study | Felix Berglund</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-<body class="min-h-screen bg-white">
-
-  <!-- Navigation -->
-  <nav id="navbar" class="fixed top-0 z-10 w-full transition-all duration-300 bg-white/80 shadow-md">
-    <div class="container mx-auto px-4">
-      <div class="flex justify-between items-center h-16">
-        <div class="flex items-center">
-          <a href="index.html" class="text-2xl font-bold text-gray-900">Felix Berglund</a>
-        </div>
-        <div class="flex space-x-8">
-          <a href="index.html#work" class="text-gray-700 hover:text-blue-600 transition-colors">Work</a>
-          <a href="index.html#about" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
-          <a href="index.html#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <main class="pt-32 pb-20 px-4">
-    <div class="container mx-auto max-w-6xl">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8 font-heading">Portfolio Website Case Study</h1>
-
-      <div class="prose max-w-none">
-        <p class="text-gray-700 mb-4 font-body">
-          This project details the design and development process of this very portfolio website, showcasing my skills as an Interaction Designer.
-        </p>
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Project Goal</h2>
-        <p class="text-gray-700 mb-4 font-body">
-          The primary goal was to create a clean, modern, and responsive website to effectively showcase my UX/UI design projects and skills. It needed to be easy to navigate and provide a clear overview of my work and capabilities.
-        </p>
-
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Technologies Used</h2>
-        <ul class="list-disc list-inside text-gray-700 mb-4 font-body">
-          <li>HTML5: For structuring the content.</li>
-          <li>Tailwind CSS: For rapid styling and responsive design.</li>
-          <li>JavaScript: For interactive elements like the sticky navigation and smooth scrolling.</li>
-          <li>Custom CSS Animation: For the seamless logo carousel effect.</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Key Features Developed</h2>
-        <ul class="list-disc list-inside text-gray-700 mb-4 font-body">
-          <li>**Responsive Layout:** Ensuring the site looks great on all devices.</li>
-          <li>**Sticky Navigation:** The header stays visible as you scroll.</li>
-          <li>**Smooth Scrolling:** Providing a pleasant user experience when navigating between sections.</li>
-          <li>**Seamless Logo Carousel:** A continuously animating display of tools and technologies used.</li>
-        </ul>
-
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Design Process</h2>
-        <p class="text-gray-700 mb-4 font-body">
-          The design process involved sketching, wireframing, and prototyping to define the layout and user flow. Emphasis was placed on clear typography, a balanced visual hierarchy, and a modern aesthetic using Tailwind CSS.
-        </p>
-
-        <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4 font-heading">Reflection</h2>
-        <p class="text-gray-700 mb-4 font-body">
-          Building this portfolio provided valuable experience in front-end development, integrating design principles with code. The focus on responsiveness and performance enhancements for elements like the carousel were key learning points.
-        </p>
-
-        <p class="text-gray-700 mb-4 font-body">
-          <a href="index.html" class="text-blue-600 hover:text-blue-700">Back to Home</a>
-        </p>
-      </div>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="py-8 border-t">
-    <div class="container mx-auto max-w-6xl px-4">
-      <div class="flex justify-between items-center">
-        <p class="text-gray-600">© <span id="current-year-footer"></span> Felix Berglund. All rights reserved.</p>
-        <div class="flex gap-6">
-          <a href="https://www.linkedin.com/in/felix-berglund-5a566825b/" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600">LinkedIn</a>
-          <a href="https://github.com/FelixJrB" target="_blank" rel="noopener noreferrer" class="text-gray-600 hover:text-blue-600">GitHub</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Website Case Study | Felix Berglund</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+  </head>
+  <body class="min-h-screen bg-white">
+    <!-- Navigation -->
+    <nav
+      id="navbar"
+      class="fixed top-0 z-10 w-full bg-white/80 shadow-md transition-all duration-300"
+    >
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center justify-between">
+          <div class="flex items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">Felix Berglund</a>
+          </div>
+          <div class="flex space-x-8">
+            <a href="index.html#work" class="text-gray-700 transition-colors hover:text-blue-600"
+              >Work</a
+            >
+            <a href="index.html#about" class="text-gray-700 transition-colors hover:text-blue-600"
+              >About</a
+            >
+            <a href="index.html#contact" class="text-gray-700 transition-colors hover:text-blue-600"
+              >Contact</a
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
+    </nav>
 
-  <script>
-    // Automatically update copyright year in footer
-    const yearSpan = document.getElementById('current-year-footer');
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
-  </script>
+    <main class="px-4 pb-20 pt-32">
+      <div class="container mx-auto max-w-6xl">
+        <h1 class="mb-8 font-heading text-4xl font-bold text-gray-900 md:text-5xl">
+          Portfolio Website Case Study
+        </h1>
 
-</body>
-</html> 
+        <div class="prose max-w-none">
+          <p class="mb-4 font-body text-gray-700">
+            This project details the design and development process of this very portfolio website,
+            showcasing my skills as an Interaction Designer.
+          </p>
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">Project Goal</h2>
+          <p class="mb-4 font-body text-gray-700">
+            The primary goal was to create a clean, modern, and responsive website to effectively
+            showcase my UX/UI design projects and skills. It needed to be easy to navigate and
+            provide a clear overview of my work and capabilities.
+          </p>
+
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">Technologies Used</h2>
+          <ul class="mb-4 list-inside list-disc font-body text-gray-700">
+            <li>HTML5: For structuring the content.</li>
+            <li>Tailwind CSS: For rapid styling and responsive design.</li>
+            <li>
+              JavaScript: For interactive elements like the sticky navigation and smooth scrolling.
+            </li>
+            <li>Custom CSS Animation: For the seamless logo carousel effect.</li>
+          </ul>
+
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">
+            Key Features Developed
+          </h2>
+          <ul class="mb-4 list-inside list-disc font-body text-gray-700">
+            <li>Responsive Layout: Ensuring the site looks great on all devices.</li>
+            <li>Sticky Navigation: The header stays visible as you scroll.</li>
+            <li>
+              Smooth Scrolling: Providing a pleasant user experience when navigating between
+              sections.
+            </li>
+            <li>
+              Seamless Logo Carousel: A continuously animating display of tools and technologies
+              used.
+            </li>
+          </ul>
+
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">Design Process</h2>
+          <p class="mb-4 font-body text-gray-700">
+            The design process involved sketching, wireframing, and prototyping to define the layout
+            and user flow. Emphasis was placed on clear typography, a balanced visual hierarchy, and
+            a modern aesthetic using Tailwind CSS.
+          </p>
+
+          <h2 class="mb-4 mt-8 font-heading text-2xl font-bold text-gray-900">Reflection</h2>
+          <p class="mb-4 font-body text-gray-700">
+            Building this portfolio provided valuable experience in front-end development,
+            integrating design principles with code. The focus on responsiveness and performance
+            enhancements for elements like the carousel were key learning points.
+          </p>
+
+          <p class="mb-4 font-body text-gray-700">
+            <a href="index.html" class="text-blue-600 hover:text-blue-700">Back to Home</a>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t py-8">
+      <div class="container mx-auto max-w-6xl px-4">
+        <div class="flex items-center justify-between">
+          <p class="text-gray-600">
+            © <span id="current-year-footer"></span> Felix Berglund. All rights reserved.
+          </p>
+          <div class="flex gap-6">
+            <a
+              href="https://www.linkedin.com/in/felix-berglund-5a566825b/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-600 hover:text-blue-600"
+              >LinkedIn</a
+            >
+            <a
+              href="https://github.com/FelixJrB"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-gray-600 hover:text-blue-600"
+              >GitHub</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Automatically update copyright year in footer
+      const yearSpan = document.getElementById('current-year-footer');
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+    </script>
+  </body>
+</html>
