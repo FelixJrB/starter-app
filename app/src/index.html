@@ -15,31 +15,326 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
     />
+    <style>
+      /* Custom CSS for enhanced interactions and colors */
+      :root {
+        /* Modern color palette */
+        --primary: #4f46e5;
+        --primary-dark: #4338ca;
+        --secondary: #7c3aed;
+        --accent: #8b5cf6;
+        --accent-light: #a78bfa;
+        --text-primary: #1f2937;
+        --text-secondary: #4b5563;
+        
+        /* Background colors */
+        --bg-gradient-start: #eef2ff;
+        --bg-gradient-mid: #f5f3ff;
+        --bg-gradient-end: #faf5ff;
+        --bg-pattern: rgba(99, 102, 241, 0.03);
+        --bg-accent: rgba(139, 92, 246, 0.03);
+      }
+
+      /* Modern background styles */
+      body {
+        background: linear-gradient(
+          135deg,
+          var(--bg-gradient-start) 0%,
+          var(--bg-gradient-mid) 50%,
+          var(--bg-gradient-end) 100%
+        );
+        position: relative;
+        overflow-x: hidden;
+        padding-top: 4rem; /* 64px - height of navbar */
+      }
+
+      /* Modern geometric pattern */
+      body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: 
+          linear-gradient(120deg, var(--bg-pattern) 0%, transparent 100%),
+          radial-gradient(circle at 0% 0%, var(--bg-accent) 0%, transparent 50%),
+          radial-gradient(circle at 100% 100%, var(--bg-accent) 0%, transparent 50%),
+          repeating-linear-gradient(
+            45deg,
+            var(--bg-pattern) 0px,
+            var(--bg-pattern) 1px,
+            transparent 1px,
+            transparent 10px
+          );
+        background-size: 100% 100%, 100% 100%, 100% 100%, 20px 20px;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.8;
+      }
+
+      /* Subtle animated gradient overlay */
+      body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          45deg,
+          transparent 0%,
+          var(--bg-accent) 25%,
+          transparent 50%,
+          var(--bg-pattern) 75%,
+          transparent 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 20s ease infinite;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.4;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Ensure content stays above the background pattern */
+      .container, 
+      #navbar,
+      section {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Modern section backgrounds */
+      section.bg-gray-50 {
+        background: linear-gradient(
+          to bottom,
+          rgba(238, 242, 255, 0.9),
+          rgba(245, 243, 255, 0.95)
+        );
+        backdrop-filter: blur(8px);
+      }
+
+      /* Enhanced card backgrounds */
+      .card-hover {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.95),
+          rgba(255, 255, 255, 0.98)
+        );
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.8);
+        box-shadow: 
+          0 4px 6px -1px rgba(79, 70, 229, 0.1),
+          0 2px 4px -1px rgba(79, 70, 229, 0.06),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+      }
+
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 
+          0 20px 25px -5px rgba(79, 70, 229, 0.1),
+          0 10px 10px -5px rgba(79, 70, 229, 0.04),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 1),
+          rgba(255, 255, 255, 0.98)
+        );
+      }
+
+      /* Enhanced Navigation Styles */
+      #navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0.9)
+        );
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+      }
+
+      #navbar.scrolled {
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.95),
+          rgba(255, 255, 255, 1)
+        );
+        box-shadow: 
+          0 4px 6px -1px rgba(79, 70, 229, 0.1),
+          0 2px 4px -1px rgba(79, 70, 229, 0.06);
+      }
+
+      /* Navigation Link Styles */
+      .nav-link {
+        position: relative;
+        padding: 0.5rem 0;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      .nav-link:hover {
+        color: var(--primary);
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Enhanced hover states */
+      .hover-lift {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .hover-lift:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Button enhancements */
+      .btn-primary {
+        background: linear-gradient(
+          135deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background: linear-gradient(
+          135deg,
+          var(--primary-dark) 0%,
+          var(--accent) 100%
+        );
+        transform: translateY(-2px);
+        box-shadow: 
+          0 4px 6px -1px rgba(79, 70, 229, 0.2),
+          0 2px 4px -1px rgba(79, 70, 229, 0.1);
+      }
+
+      /* Card enhancements */
+      .card-hover {
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .card-hover:hover {
+        transform: translateY(-8px) scale(1.02);
+      }
+
+      /* Image hover effects */
+      .img-hover {
+        transition: transform 0.5s ease;
+      }
+
+      .img-hover:hover {
+        transform: scale(1.05);
+      }
+
+      /* Link hover effects */
+      .link-hover {
+        position: relative;
+        transition: color 0.3s ease;
+      }
+
+      .link-hover::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -2px;
+        left: 0;
+        background: linear-gradient(
+          90deg,
+          var(--primary) 0%,
+          var(--secondary) 100%
+        );
+        transition: width 0.3s ease;
+      }
+
+      .link-hover:hover::after {
+        width: 100%;
+      }
+
+      /* Tool icon hover effects */
+      .tool-icon {
+        transition: all 0.3s ease;
+      }
+
+      .tool-icon:hover {
+        transform: translateY(-4px);
+        filter: grayscale(0) drop-shadow(0 4px 6px rgba(79, 70, 229, 0.1));
+      }
+
+      /* Section transitions */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
   </head>
-  <body class="min-h-screen bg-white">
+  <body class="min-h-screen">
     <!-- Sticky Navigation -->
-    <nav id="navbar" class="fixed top-0 z-10 w-full bg-transparent transition-all duration-300">
-      <div class="container mx-auto px-4">
+    <nav id="navbar" class="w-full">
+      <div class="container mx-auto px-6">
         <div class="flex h-16 items-center justify-between">
           <!-- Logo -->
           <div class="flex items-center">
-            <a href="#" class="text-2xl font-bold text-gray-900">Felix Berglund</a>
+            <a href="#" class="text-2xl font-bold text-gray-900 nav-link">Felix Berglund</a>
           </div>
           <!-- Menu Items -->
           <div class="flex space-x-8">
-            <a href="#work" class="text-gray-700 transition-colors hover:text-blue-600">Work</a>
-            <a href="#about" class="text-gray-700 transition-colors hover:text-blue-600">About</a>
-            <a href="#contact" class="text-gray-700 transition-colors hover:text-blue-600"
-              >Contact</a
-            >
+            <a href="#work" class="nav-link text-gray-700">Work</a>
+            <a href="#about" class="nav-link text-gray-700">About</a>
+            <a href="#contact" class="nav-link text-gray-700">Contact</a>
           </div>
         </div>
       </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="px-4 pb-20 pt-32">
-      <div class="container mx-auto max-w-6xl">
+    <section class="px-6 pb-20 pt-32 fade-in">
+      <div class="container mx-auto max-w-6xl px-6">
         <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
           <div>
             <h1 class="mb-6 font-heading text-5xl font-bold text-gray-900 md:text-7xl">
@@ -51,17 +346,17 @@
             </p>
             <a
               href="#work"
-              class="inline-block rounded-lg bg-blue-600 px-8 py-4 text-white transition-colors hover:bg-blue-700"
+              class="btn-primary inline-block rounded-lg bg-blue-600 px-8 py-4 text-white transition-colors hover:bg-blue-700"
               >View My Work</a
             >
           </div>
           <div class="relative">
             <!-- Profile image -->
-            <div class="aspect-square rounded-2xl bg-gray-100">
+            <div class="aspect-square rounded-2xl bg-gray-100 overflow-hidden">
               <img
                 src="/assets/images/selfie.jpg"
                 alt="Felix Berglund"
-                class="h-full w-full rounded-2xl object-cover"
+                class="h-full w-full rounded-2xl object-cover img-hover"
               />
             </div>
           </div>
@@ -70,14 +365,14 @@
     </section>
 
     <!-- Featured Work Section -->
-    <section id="work" class="bg-gray-50 py-20">
-      <div class="container mx-auto max-w-6xl px-4">
+    <section id="work" class="bg-gray-50 py-20 px-6 fade-in">
+      <div class="container mx-auto max-w-6xl px-6">
         <h2 class="mb-12 font-heading text-3xl font-bold text-gray-900 md:text-4xl">
           Selected Work
         </h2>
         <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
           <!-- Eggcellent -->
-          <a href="eggcellent.html" class="group block">
+          <a href="eggcellent.html" class="group block card-hover p-6">
             <div
               class="mb-4 flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-gray-100"
             >
@@ -119,7 +414,7 @@
             </div>
           </a>
           <!-- Tiktok -->
-          <a href="tiktok.html" class="group block">
+          <a href="tiktok.html" class="group block card-hover p-6">
             <div
               class="mb-4 flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-gray-100"
             >
@@ -149,7 +444,7 @@
             </div>
           </a>
           <!-- Bossa Care -->
-          <a href="bossa-care.html" class="group block">
+          <a href="bossa-care.html" class="group block card-hover p-6">
             <div
               class="mb-4 flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-gray-100"
             >
@@ -179,11 +474,15 @@
             </div>
           </a>
           <!-- Portfolio Website -->
-          <a href="portfolio-website.html" class="group block">
+          <a href="portfolio-website.html" class="group block card-hover p-6">
             <div
               class="mb-4 flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-gray-100"
             >
-              <span class="text-gray-400">Image coming soon</span>
+              <img
+                src="assets/images/portfoliowebsite.jpeg"
+                alt="Portfolio Website Screenshot"
+                class="h-full w-full rounded-lg object-cover shadow-md transition hover:opacity-80"
+              />
             </div>
             <div>
               <h3 class="mb-1 font-heading text-lg font-semibold text-gray-900">
@@ -209,7 +508,7 @@
             </div>
           </a>
           <!-- Wilson Creative Wireframe Design -->
-          <a href="wilson_creative_wireframes.html" class="group block">
+          <a href="wilson_creative_wireframes.html" class="group block card-hover p-6">
             <div
               class="mb-4 flex aspect-video items-center justify-center overflow-hidden rounded-xl bg-gray-100 p-2"
             >
@@ -261,8 +560,8 @@
     </section>
 
     <!-- Logo Carousel Section -->
-    <section class="w-full bg-white py-12">
-      <div class="container mx-auto max-w-6xl px-4">
+    <section class="w-full bg-white py-12 px-6 fade-in">
+      <div class="container mx-auto max-w-6xl px-6">
         <h2 class="mb-8 text-center font-heading text-2xl font-semibold text-gray-900">
           Tools & Technologies
         </h2>
@@ -517,12 +816,10 @@
     </section>
 
     <!-- Card Section -->
-    <section class="bg-transparent py-12">
+    <section class="bg-transparent py-12 px-6 fade-in">
       <div class="container mx-auto grid max-w-6xl grid-cols-1 gap-8 md:grid-cols-3">
         <!-- Card 1: About Me -->
-        <div
-          class="rounded-2xl border border-gray-200 bg-white/80 p-8 shadow-2xl backdrop-blur-md transition hover:scale-105"
-        >
+        <div class="card-hover rounded-2xl border border-gray-200 bg-white/80 p-8 shadow-2xl backdrop-blur-md">
           <h3 class="mb-2 font-heading text-xl font-bold text-gray-900">About me</h3>
           <p class="font-body text-gray-700">
             Passionate UX designer who transforms complex problems into elegant, human-centered
@@ -531,9 +828,7 @@
           </p>
         </div>
         <!-- Card 2: What I Do -->
-        <div
-          class="rounded-2xl border border-gray-200 bg-white/80 p-8 shadow-2xl backdrop-blur-md transition hover:scale-105"
-        >
+        <div class="card-hover rounded-2xl border border-gray-200 bg-white/80 p-8 shadow-2xl backdrop-blur-md">
           <h3 class="mb-2 font-heading text-xl font-bold text-gray-900">What I do</h3>
           <p class="font-body text-gray-700">
             UX design, prototyping, user testing and research. I'm passionate about creating
@@ -543,9 +838,7 @@
           </p>
         </div>
         <!-- Card 3: How I Work -->
-        <div
-          class="rounded-2xl border border-gray-200 bg-white/80 p-8 shadow-2xl backdrop-blur-md transition hover:scale-105"
-        >
+        <div class="card-hover rounded-2xl border border-gray-200 bg-white/80 p-8 shadow-2xl backdrop-blur-md">
           <h3 class="mb-2 font-heading text-xl font-bold text-gray-900">How I work</h3>
           <p class="font-body text-gray-700">
             My design process centers on empathy, creative problem solving, and collaboration.
@@ -558,8 +851,8 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-20">
-      <div class="container mx-auto max-w-6xl px-4">
+    <section id="about" class="py-20 px-6 fade-in">
+      <div class="container mx-auto max-w-6xl px-6">
         <div class="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
           <div>
             <h2 class="mb-6 font-heading text-3xl font-bold text-gray-900 md:text-4xl">About Me</h2>
@@ -592,11 +885,11 @@
               >
             </div>
           </div>
-          <div class="relative">
+          <div class="relative w-full">
             <!-- About image -->
             <div class="aspect-square rounded-2xl bg-gray-100">
               <img
-                src="/assets/images/selfie.jpg"
+                src="/assets/images/selfie-removedbg.png"
                 alt="Felix Berglund"
                 class="h-full w-full rounded-2xl object-cover"
               />
@@ -607,8 +900,8 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-gray-50 py-20">
-      <div class="container mx-auto max-w-6xl px-4">
+    <section id="contact" class="bg-gray-50 py-20 px-6 fade-in">
+      <div class="container mx-auto max-w-6xl px-6">
         <div class="mx-auto max-w-2xl text-center">
           <h2 class="mb-6 font-heading text-3xl font-bold text-gray-900 md:text-4xl">
             Let's Work Together
@@ -619,7 +912,7 @@
           </p>
           <a
             href="mailto:felixjrberglund@gmail.com"
-            class="inline-block rounded-lg bg-blue-600 px-8 py-4 text-white transition-colors hover:bg-blue-700"
+            class="btn-primary inline-block rounded-lg bg-blue-600 px-8 py-4 text-white transition-colors hover:bg-blue-700"
             >Get in Touch</a
           >
         </div>
@@ -627,8 +920,8 @@
     </section>
 
     <!-- Footer -->
-    <footer class="border-t py-8">
-      <div class="container mx-auto max-w-6xl px-4">
+    <footer class="border-t py-8 fade-in">
+      <div class="container mx-auto max-w-6xl px-6">
         <div class="flex items-center justify-between">
           <p id="copyright-year" class="text-gray-600">
             © 2025 Felix Berglund. All rights reserved.
@@ -654,5 +947,89 @@
     </footer>
 
     <script type="module" src="js/index.js"></script>
+    <script>
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.fade-in').forEach((element) => {
+        observer.observe(element);
+      });
+
+      // Enhanced scroll handling for navbar
+      const navbar = document.getElementById('navbar');
+      const heroSection = document.querySelector('section:first-of-type'); // Hero section
+      const heroHeight = heroSection?.offsetHeight || 0;
+      
+      window.addEventListener('scroll', () => {
+        // Handle navbar background
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+
+        // Get scroll position and document dimensions
+        const scrollPosition = window.scrollY + 100;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+        const isAtBottom = windowHeight + window.scrollY >= documentHeight - 50;
+        const isInHero = scrollPosition < heroHeight;
+
+        // Handle section highlighting
+        const sections = document.querySelectorAll('section[id]');
+        
+        if (isInHero) {
+          // If in hero section, remove all active states
+          document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+        } else if (isAtBottom) {
+          // If at bottom, highlight contact
+          document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+          document.querySelector('.nav-link[href="#contact"]')?.classList.add('active');
+        } else {
+          // Normal section highlighting
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+              document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+              document.querySelector(`.nav-link[href="#${sectionId}"]`)?.classList.add('active');
+            }
+          });
+        }
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('.nav-link[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const navbarHeight = navbar.offsetHeight;
+            const targetPosition = targetElement.offsetTop - navbarHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>

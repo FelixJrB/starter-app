@@ -55,7 +55,7 @@
         </div>
         <!-- Main Project Image -->
         <img
-          src="assets/images/tiktok/tiktok_casestudy.jpg"
+          src="/assets/images/tiktok/tiktok_casestudy.jpg"
           alt="TikTok Case Study Main"
           class="mb-8 w-full rounded-xl object-cover shadow-lg"
         />
@@ -161,7 +161,7 @@
             Example of visual fatigue caused by low contrast and bright themes:
           </p>
           <img
-            src="assets/images/tiktok/tiktok_problem.jpg"
+            src="/assets/images/tiktok/tiktok_problem.jpg"
             alt="TikTok Visual Fatigue Example"
             class="mx-auto block w-full max-w-xl rounded-lg object-cover shadow-md"
           />
@@ -223,21 +223,21 @@
         <h2 class="mb-4 mt-10 text-2xl font-semibold">Gallery</h2>
         <div class="mb-8 grid grid-cols-2 gap-4 md:grid-cols-2">
           <button
-            onclick="openModal('assets/images/tiktok/tiktok_casestudy.jpg', 'TikTok Case Study Main')"
+            onclick="openModal('/assets/images/tiktok/tiktok_casestudy.jpg', 'TikTok Case Study Main')"
             class="focus:outline-none"
           >
             <img
-              src="assets/images/tiktok/tiktok_casestudy.jpg"
+              src="/assets/images/tiktok/tiktok_casestudy.jpg"
               alt="TikTok Case Study Main"
               class="rounded-lg object-cover shadow-md transition hover:opacity-80"
             />
           </button>
           <button
-            onclick="openModal('assets/images/tiktok/tiktok_problem.jpg', 'TikTok Visual Fatigue Example')"
+            onclick="openModal('/assets/images/tiktok/tiktok_problem.jpg', 'TikTok Visual Fatigue Example')"
             class="focus:outline-none"
           >
             <img
-              src="assets/images/tiktok/tiktok_problem.jpg"
+              src="/assets/images/tiktok/tiktok_problem.jpg"
               alt="TikTok Visual Fatigue Example"
               class="rounded-lg object-cover shadow-md transition hover:opacity-80"
             />
@@ -246,7 +246,7 @@
         <!-- Lightbox Modal -->
         <div
           id="modal"
-          class="fixed inset-0 z-50 flex hidden items-center justify-center bg-black bg-opacity-80"
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-80"
         >
           <div class="relative flex w-full max-w-3xl flex-col items-center">
             <button
@@ -275,22 +275,19 @@
         </div>
         <script>
           // Gallery image data
-          const galleryImages = [
-            { src: 'assets/images/tiktok/tiktok_casestudy.jpg', caption: 'TikTok Case Study Main' },
-            {
-              src: 'assets/images/tiktok/tiktok_problem.jpg',
-              caption: 'TikTok Visual Fatigue Example',
-            },
+          var images = [
+            { src: '/assets/images/tiktok/tiktok_casestudy.jpg', caption: 'TikTok Case Study Main' },
+            { src: '/assets/images/tiktok/tiktok_problem.jpg', caption: 'TikTok Visual Fatigue Example' },
           ];
           let currentIndex = 0;
 
           function openModal(src, caption) {
-            currentIndex = galleryImages.findIndex((img) => img.src === src);
+            currentIndex = images.findIndex((img) => img.src === src);
             showModalImage();
             document.getElementById('modal').classList.remove('hidden');
           }
           function showModalImage() {
-            const img = galleryImages[currentIndex];
+            const img = images[currentIndex];
             document.getElementById('modalImg').src = img.src;
             document.getElementById('modalCaption').textContent = img.caption || '';
           }
@@ -300,11 +297,11 @@
             document.getElementById('modalCaption').textContent = '';
           }
           function prevModalImage() {
-            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
             showModalImage();
           }
           function nextModalImage() {
-            currentIndex = (currentIndex + 1) % galleryImages.length;
+            currentIndex = (currentIndex + 1) % images.length;
             showModalImage();
           }
           // Optional: Close modal on background click

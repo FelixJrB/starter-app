@@ -3,7 +3,8 @@ import path from 'path';
 
 export default defineConfig({
   root: 'app/src',
-  publicDir: path.resolve(__dirname, 'assets'),
+  base: '/',
+  publicDir: 'assets',
   build: {
     outDir: '../dist',
     target: 'esnext',
